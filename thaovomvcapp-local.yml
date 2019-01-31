@@ -1,0 +1,42 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: thaovomvc-deployment
+spec:
+  selector:
+    matchLabels:
+      app: thaovomvc
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: thaovomvc
+    spec:
+      containers:
+      - name: thaovomvc
+        image: vohuythao/thaovomvcapp:latest
+        ports:
+        - containerPort: 80
+        env:
+         - name: ConnectionStrings__ProductsContext
+           valueFrom:
+             secretKeyRef:
+               name: mssql-secret
+               key: db-connection-string-secret
+            #  configMapKeyRef: 
+            #    name: mssql-connection-configmap
+            #    key: db-connection-string
+---        
+kind: Service
+apiVersion: v1
+metadata:
+  name: thaovomvc-service
+spec:
+  selector:
+    app: thaovomvc
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30100
+  type: NodePort 

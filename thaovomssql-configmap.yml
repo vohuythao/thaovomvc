@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mssql-connection-configmap
+  labels:
+    app: thaovomvc
+data:
+  db-connection-string: Server=mssql-service;Database=ProdcutsDB;User=SA;Password=Kms@2018;

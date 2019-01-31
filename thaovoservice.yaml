@@ -1,0 +1,13 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: thaovomvc-service
+spec:
+  selector:
+    app: thaovomvc
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 30100
+  type: NodePort
