@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: thaovomvc
-        image: vohuythao/thaovomvcapp:latest
+        image: vohuythao/thaovomvcapp:v2.#{Build.BuildId}#
         ports:
         - containerPort: 80
         env:
